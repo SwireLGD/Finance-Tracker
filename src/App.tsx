@@ -1,6 +1,9 @@
+import { Route, Routes } from "react-router-dom";
 import Appbar from "./components/Appbar/Appbar";
+import TransactionsList from "./components/transactions/transactions";
 import CategoriesList from "./components/categories/CategoryList";
-import TransactionsList from "./components/transactions/transactions"
+import PageNotFound from "./containers/PageNotFound";
+
 
 ;const App = () => {
 
@@ -10,8 +13,11 @@ import TransactionsList from "./components/transactions/transactions"
         <Appbar />
       </header>
       <main className="container-fluid">
-        <TransactionsList />
-        <CategoriesList />
+        <Routes>
+          <Route path="/" element={<TransactionsList />} />
+          <Route path="/categories" element={<CategoriesList />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       </main>
     </>
   );

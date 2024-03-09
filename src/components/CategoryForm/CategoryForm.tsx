@@ -8,7 +8,7 @@ import { ApiCategory } from '../../types';
 interface Props {
     onClose: () => void;
     isLoading?: boolean;
-    existingCategory?: ApiCategory;
+    existingCategory?: ApiCategory | null;
 }
 
 const initialState = {
@@ -76,8 +76,8 @@ const AddCategory: React.FC<Props> = ({ onClose, isLoading = false, existingCate
             </div>
 
             <button type="submit" className="btn btn-primary mt-3" disabled={isLoading}>
-                {isLoading && <ButtonSpinner/>}
-                Add Category
+                {isLoading && <ButtonSpinner />}
+                {existingCategory ? 'Update Category' : 'Add Category'}
             </button>
         </form>
     );

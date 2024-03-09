@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store'; 
 import { Transaction, ApiTransaction } from '../../types';
 import dayjs from 'dayjs';
 import { addTransaction, updateTransaction } from '../../store/transactionThunks';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 interface Props {
   transaction?: Transaction;
@@ -13,7 +12,7 @@ interface Props {
 
 const TransactionForm: React.FC<Props> = ({ transaction, onClose }) => {
     const dispatch = useAppDispatch();
-    const categories = useSelector((state: RootState) => state.category.items);
+    const categories = useAppSelector((state: RootState) => state.category.items);
 
     const [type, setType] = useState<'income' | 'expense'>('income');
     const [category, setCategory] = useState('');

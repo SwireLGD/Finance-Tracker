@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Transaction } from '../types';
 import Modal from '../components/Modal.tsx/Modal';
 import TransactionForm from '../components/AddTransaction/AddTransaction';
