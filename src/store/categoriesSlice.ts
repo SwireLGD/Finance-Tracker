@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Category } from "../types";
-import { addCategory, deleteCategory, fetchCategories } from "./categoriesThunks";
+import { addCategory, deleteCategory, editCategory, fetchCategories } from "./categoriesThunks";
 
 interface categoryState {
     items: Category[];
@@ -31,7 +31,12 @@ const categorySlice = createSlice({
                 state.items.push(action.payload);
             }).addCase(deleteCategory.fulfilled, (state, action) => {
                 state.items = state.items.filter(category => category.id !== action.payload);
-            });
+            }).addCase(editCategory.fulfilled, (state, action) => {
+                const index = state.items.findIndex(category => category.id === action.payload.id);
+                if (index !== -1) {
+                    state.items[index] = action.payload;
+                }
+            })
     },
 });
 

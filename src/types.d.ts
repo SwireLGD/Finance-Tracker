@@ -20,3 +20,7 @@ export interface ApiCategory {
 export interface Category extends ApiCategory {
     id: string;
 }
+
+interface ApiCategories {
+    [key: string]: ApiCategory;
+  }
