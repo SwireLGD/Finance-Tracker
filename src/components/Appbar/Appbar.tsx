@@ -1,7 +1,13 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import Modal from "../Modal.tsx/Modal";
+import TransactionForm from "../AddTransaction/AddTransaction";
 
 const Appbar: React.FC = () => {
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleOpenModal = () => setIsModalOpen(true);
+    const handleCloseModal = () => setIsModalOpen(false);
+        
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container-fluid">
@@ -12,9 +18,12 @@ const Appbar: React.FC = () => {
                         <li className="nav-item">
                             <NavLink to="/categories" className="nav-link">Categories</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink to="/add-transaction" className="nav-link">Add</NavLink>
-                        </li>
+                        <button onClick={handleOpenModal} className="nav-link">Add</button>
+                        {isModalOpen && (
+                            <Modal show={isModalOpen} title="Add Transaction" onClose={handleCloseModal}>
+                                <TransactionForm onClose={handleCloseModal} />
+                            </Modal>
+                        )}
                     </ul>
             </div>
         </nav>

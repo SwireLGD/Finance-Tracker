@@ -12,14 +12,18 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
   const dispatch = useAppDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteCategory(category.id));
+    const isConfirmed = window.confirm('Confirm delete');
+    if (isConfirmed) {
+      dispatch(deleteCategory(category.id));
+    } else return;
   };
 
   return (
-    <li>
-      {category.name} - {category.type}
-      <button onClick={handleDelete}>Delete</button>
-      <button>Edit</button>
+    <li className='list-group-item m-2 border rounded-3 d-flex align-items-center'>
+      <p className='mb-0'>{category.name}</p>
+      <p className='mb-0 ms-auto me-2'>{category.type}</p> 
+      <button onClick={handleDelete} className='btn btn-danger me-1'>Delete</button>
+      <button className='btn btn-success'>Edit</button>
     </li>
   );
 };

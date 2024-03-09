@@ -42,4 +42,4 @@ export const editCategory = createAsyncThunk(
         const response = await axiosApi.put('/categories/' + category.id + '.json', category);
         return response.data;
     }
-);
+)

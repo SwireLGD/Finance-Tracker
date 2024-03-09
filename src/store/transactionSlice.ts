@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Transaction } from "../types";
-import { fetchTransactions } from "./transactionThunks";
+import { addTransaction, deleteTransaction, fetchTransactions, updateTransaction } from "./transactionThunks";
 
 interface TransactionsState {
     items: Transaction[];
@@ -27,6 +27,15 @@ export const transactionsSlice = createSlice ({
                 state.items = transactions;
             }).addCase(fetchTransactions.rejected, (state) => {
                 state.fetchLoading = false;
+            }).addCase(addTransaction.fulfilled, (state, action) => {
+                state.items.unshift(action.payload);
+            }).addCase(updateTransaction.fulfilled, (state, action) => {
+                const index = state.items.findIndex(t => t.id === action.payload.id);
+                if (index !== -1) {
+                    state.items[index] = action.payload;
+                }
+            }).addCase(deleteTransaction.fulfilled, (state, action) => {
+                state.items = state.items.filter(transaction => transaction.id !== action.payload);
             });
     }
 });

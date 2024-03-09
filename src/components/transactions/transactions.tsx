@@ -20,8 +20,7 @@ export const TransactionsList: React.FC = () => {
     }
 
     return (
-        <div>
-          <h2>Transactions</h2>
+        <div className="m-2">
           {transactions.length > 0 ? (
             <ul>
               {transactions.map((transaction) => (

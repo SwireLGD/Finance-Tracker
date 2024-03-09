@@ -19,8 +19,10 @@ const CategoriesList: React.FC = () => {
 
   return (
     <div>
-      <h2>Categories</h2>
-      <button onClick={handleOpenModal}>Add Category</button>
+      <div className='d-flex justify-content-between mb-4'>
+        <h2>Categories</h2>
+        <button onClick={handleOpenModal} className='btn btn-primary'>Add Category</button>
+      </div>
       <Modal
         show={isModalOpen}
         title="Add New Category"
@@ -28,7 +30,7 @@ const CategoriesList: React.FC = () => {
       >
         <AddCategory onClose={handleCloseModal} />
       </Modal>
-      <ul>
+      <ul className='list-group'>
         {categories.map((category) => (
           <CategoryItem key={category.id} category={category} />
         ))}

@@ -6,9 +6,13 @@ import TransactionsList from "./components/transactions/transactions"
 
   return (
     <>
-      <Appbar />
-      <TransactionsList />
-      <CategoriesList />
+      <header>
+        <Appbar />
+      </header>
+      <main className="container-fluid">
+        <TransactionsList />
+        <CategoriesList />
+      </main>
     </>
   );
 };

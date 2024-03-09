@@ -12,7 +12,7 @@ const Modal: React.FC<Props> = ({show, title, onClose, children}) => {
         <Backdrop show={show} onClick={onClose}/>
         <div className="modal show" style={{display: show ? 'block': 'none'}} onClick={onClose}>
           <div className="modal-dialog" onClick={e => e.stopPropagation()}>
-            <div className="modal-content">
+            <div className="modal-content p-2">
               <div className="modal-header">
                 <h1 className="modal-title fs-5">{title}</h1>
               </div>
