@@ -28,7 +28,7 @@ export const transactionsSlice = createSlice ({
             }).addCase(fetchTransactions.rejected, (state) => {
                 state.fetchLoading = false;
             }).addCase(addTransaction.fulfilled, (state, action) => {
-                state.items.unshift(action.payload);
+                state.items.push(action.payload);
             }).addCase(updateTransaction.fulfilled, (state, action) => {
                 const index = state.items.findIndex(t => t.id === action.payload.id);
                 if (index !== -1) {

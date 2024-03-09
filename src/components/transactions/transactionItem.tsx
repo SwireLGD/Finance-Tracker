@@ -3,15 +3,17 @@ import { Transaction } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import dayjs from 'dayjs';
 import { deleteTransaction } from '../../store/transactionThunks';
+import { RootState } from '../../app/store';
 
 interface TransactionItemProps {
   transaction: Transaction;
+  onEdit: (transaction: Transaction) => void;
 }
 
-const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
-  const categories = useAppSelector(state => state.category.items);
-  const category = categories.find(c => c.id === transaction.category);
+const TransactionItem: React.FC<TransactionItemProps> = ({ transaction, onEdit }) => {
   const dispatch = useAppDispatch();
+  const { items: categories, fetchLoading: categoriesLoading } = useAppSelector((state: RootState) => state.category);
+  const category = categories.find(c => c.id === transaction.category);
 
   const handleDelete = () => {
     const isConfirmed = window.confirm('Are you sure you want to delete this transaction?');
@@ -21,13 +23,12 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
   }
 
   useEffect(() => {
-    if (!category) {
-      dispatch(deleteTransaction(transaction.id))
+    if (!categoriesLoading && !category) {
+      dispatch(deleteTransaction(transaction.id));
     }
-  }, [category, dispatch, transaction.id]);
+  }, [categoriesLoading, category, dispatch, transaction.id]);
 
   const moneyType = category?.type === 'income' ? 'text-success' : 'text-danger';
-
 
   return (
     <li className='d-flex border align-items-center p-3 rounded-3 m-3'>
@@ -35,6 +36,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
       <p className='mb-0 ms-5 fw-semibold'>{category ? category.name : 'category doesnt exist'}</p>
       <p className={`mb-0 ms-auto ${moneyType}`}>{transaction.amount} KGS</p>
       <button onClick={handleDelete} className="btn btn-danger btn-sm ms-2">Delete</button>
+      <button className="btn btn-success btn-sm ms-2" onClick={() => onEdit(transaction)}>Edit</button>
     </li>
   );
 };

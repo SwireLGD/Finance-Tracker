@@ -36,8 +36,8 @@ export const addTransaction = createAsyncThunk(
 export const updateTransaction = createAsyncThunk(
     'transactions/updateTransaction',
     async ({ id, ...data }: Transaction) => {
-        const response = await axiosApi.put('/transactions/' + id + '.json', data);
-        return response.data;
+        await axiosApi.put('/transactions/' + id + '.json', data);
+        return { id, ...data };
     }
 );
 
