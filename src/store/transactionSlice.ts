@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Transaction } from "../types";
 import { fetchTransactions } from "./transactionThunks";
-import { RootState } from "../app/store";
 
 interface TransactionsState {
     items: Transaction[];
@@ -31,6 +30,5 @@ export const transactionsSlice = createSlice ({
             });
     }
 });
-
 
 export const transactionsReducer = transactionsSlice.reducer;

@@ -5,7 +5,7 @@ import axiosApi from "../axiosApi";
 
 export const fetchTransactions = createAsyncThunk<Transaction[], void, {dispatch: AppDispatch}>(
     'transactions/fetchAll',
-    async (_arg, thunkAPI) => {
+    async (_arg) => {
         const {data: transactions} = await axiosApi.get<ApiTransactions | null>('/transactions.json');
 
         let newTransactions: Transaction[] = [];

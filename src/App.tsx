@@ -1,8 +1,10 @@
+import TransactionsList from "./components/transactions/transactions"
+
 ;const App = () => {
 
   return (
     <>
-      hi
+      <TransactionsList />
     </>
   );
 };
